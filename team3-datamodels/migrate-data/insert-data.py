@@ -32,6 +32,8 @@ except exceptions.CosmosHttpResponseError:
 
 container = database.get_container_client(container_name)
 
+
+print("\n\n\nInserting documents into cosmos")
 # Iterating over fake person data and storing in DB
 with open('carts.json', 'r') as infile:
 	jsonData = json.load(infile)
