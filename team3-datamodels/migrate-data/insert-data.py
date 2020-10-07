@@ -40,4 +40,14 @@ with open('carts.json', 'r') as infile:
 	for cart in jsonData:
 		del cart['Id']
 		pprint(cart)
+
+		exists = False
+		for item in container.query_items(
+				query=f'SELECT * FROM {container_name} r WHERE r.UserId="{cart["UserId"]}"',
+				enable_cross_partition_query=True):
+			exists = True
+		if exists:
+			print("Already exists")
+			continue
+
 		container.upsert_item(cart)
